@@ -1,0 +1,4 @@
+//- EXPERIMENTAL
+//- If it is not working in your case just remove onload event and preload replace with stylesheet.
+link(rel="preload" as="style" onload="this.rel='stylesheet'; this.onload = null" href="css/main.css")
+link(rel="preload" as="style" onload="this.rel='stylesheet'; this.onload = null" href="css/libs.min.css")

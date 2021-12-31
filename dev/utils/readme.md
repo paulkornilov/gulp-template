@@ -1,0 +1,3 @@
+# Shared components
+
+This folder contains shared utils for components, such as common JS functions, etc...

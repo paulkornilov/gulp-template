@@ -1,0 +1,93 @@
+// GLOBALS
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
+    touch-action: manipulation;
+}
+
+html {
+    width: 100vw;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+html,
+body {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 16px;
+    line-height: normal;
+    text-rendering: optimizeSpeed;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+
+    @media (prefers-reduced-motion: reduce) {
+        scroll-behavior: auto;
+
+        * {
+            transition-duration: 0s !important;
+        }
+    }
+}
+
+input,
+select,
+textarea,
+button {
+    border-radius: 0;
+    font-family: 'Proxima Nova', sans-serif;
+    appearance: none;
+}
+
+svg,
+img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+img {
+    width: auto;
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    text-decoration-skip-ink: auto;
+}
+
+.svg-sprite {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.icon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}

@@ -1,0 +1,46 @@
+const sortOrderSmacss = require("stylelint-config-property-sort-order-smacss/generate");
+
+module.exports = {
+  extends: "stylelint-config-standard-scss",
+  plugins: ["stylelint-order", "stylelint-scss"],
+  rules: {
+    indentation: 4,
+    "no-duplicate-selectors": true,
+    "string-quotes": "single",
+    "color-hex-case": "lower",
+    "color-hex-length": "long",
+    "color-named": "never",
+    "selector-attribute-quotes": "always",
+    "selector-attribute-operator-space-before": "never",
+    "selector-attribute-operator-space-after": "never",
+    "selector-attribute-brackets-space-inside": "never",
+    "declaration-block-trailing-semicolon": "always",
+    "number-leading-zero": "always",
+    "function-url-quotes": "always",
+    "font-weight-notation": "numeric",
+    "comment-whitespace-inside": "always",
+    "comment-no-empty": true,
+    "block-no-empty": true,
+    "max-nesting-depth": null,
+    "selector-pseudo-element-colon-notation": "double",
+    "selector-pseudo-class-parentheses-space-inside": "never",
+    "declaration-property-value-disallowed-list": {
+      "/^border/": ["none"],
+    },
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        except: ["after-same-name"],
+        ignoreAtRules: ["font-face", "function", "mixin", "else"],
+      },
+    ],
+    "media-feature-range-operator-space-before": "always",
+    "media-feature-range-operator-space-after": "always",
+    "media-feature-parentheses-space-inside": "never",
+    "media-feature-colon-space-before": "never",
+    "media-feature-colon-space-after": "always",
+    "order/order": ["custom-properties", "declarations"],
+    "font-family-name-quotes": "always-unless-keyword",
+    "order/properties-order": [sortOrderSmacss({ emptyLineBefore: "never" })],
+  },
+};

@@ -1,0 +1,18 @@
+include ../partials/_mixins
+
+<!DOCTYPE html>
+html(lang="en")
+  head
+    include ../partials/_meta
+    include ../partials/_favicon
+
+    block pageTitle
+      title Template
+
+    include ../partials/_styles
+    include ../partials/_scripts
+  body
+    .svg-sprite
+      include ../../svg/sprite.svg
+
+    block content
