@@ -1,4 +1,4 @@
-// SYSTEM/PLUGINS
+// SYSTEM / PLUGINS
 import pkg from "gulp";
 import notify from "gulp-notify";
 import pug from "gulp-pug";

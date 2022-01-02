@@ -1,4 +1,4 @@
-// SYSTE/PLUGINS
+// SYSTEM / PLUGINS
 import pkg from "gulp";
 import del from "del";
 import size from "gulp-size";

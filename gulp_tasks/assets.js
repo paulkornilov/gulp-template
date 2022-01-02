@@ -1,4 +1,4 @@
-// SYSTEM/PLUGINS
+// SYSTEM / PLUGINS
 import pkg from "gulp";
 import del from "del";
 import webp from "gulp-webp";

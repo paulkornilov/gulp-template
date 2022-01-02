@@ -1,4 +1,4 @@
-// SYSTEM/PLUGINS
+// SYSTEM / PLUGINS
 import path from "path";
 import fs from "fs";
 import browserSync from "browser-sync";

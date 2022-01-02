@@ -1,4 +1,4 @@
-// SYSTEM/PLUGINS
+// SYSTEM / PLUGINS
 import pkg from "gulp";
 import browserSync from "browser-sync";
 import plumber from "gulp-plumber";
