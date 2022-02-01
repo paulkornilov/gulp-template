@@ -9,7 +9,7 @@ export const FILES_ROUTES = {
   ENTRY: {
     ASSETS: {
       WEBP: "dev/assets/images/webp",
-      IMAGES: "dev/assets/images/**/*.*",
+      IMAGES: ["dev/assets/images/**/*.*", "!dev/assets/images/favicon/*.*"],
       ROOT: "dev/assets/**/*.*",
     },
     SVG: {
