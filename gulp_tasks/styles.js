@@ -1,4 +1,4 @@
-// SYSTEM / PLUGINS
+// IMPORTS
 import pkg from "gulp";
 import browserSync from "browser-sync";
 import plumber from "gulp-plumber";
@@ -11,33 +11,22 @@ import gulpif from "gulp-if";
 import postcss from "gulp-postcss";
 
 // UTILS
-import { detectEnvironment, notification, FILES_ROUTES } from "./utils.js";
+import { detectEnvironment, showNotification } from "./utils.js";
 
 const [, isProdEnv, isDevEnv] = detectEnvironment();
 const { src, dest } = pkg;
-
-const NOTIFICATIONS = {
-  BROWSER: {
-    MAIN: "CSS compiling...",
-    LIBS: "CSS libs compiling",
-  },
-  ERROR: {
-    MAIN: "CSS error",
-    LIBS: "CSS libs error",
-  },
-};
 
 /**
  * SASS compilation + PostCSS optimizations and transformations for main SCSS files.
  */
 export const compileCSS = () => {
-  notification(NOTIFICATIONS.BROWSER.MAIN);
+  showNotification("CSS compiling...");
 
-  return src(FILES_ROUTES.ENTRY.SCSS.MAIN)
+  return src(["dev/scss/**/*.scss", "!dev/scss/**/_*.scss", "!dev/scss/libs*.scss"])
     .pipe(
       plumber({
         error_task: notify.onError((err) => ({
-          title: NOTIFICATIONS.ERROR.MAIN,
+          title: "CSS compilation error",
           message: err.message,
         })),
       }),
@@ -47,7 +36,7 @@ export const compileCSS = () => {
     .pipe(postcss())
     .pipe(gulpif(isProdEnv, cleanCSS()))
     .pipe(gulpif(isDevEnv, sourcemaps.write()))
-    .pipe(dest(FILES_ROUTES.OUTPUT.SCSS.ROOT))
+    .pipe(dest("prod/css"))
     .pipe(gulpif(isDevEnv, browserSync.stream()));
 };
 
@@ -55,13 +44,13 @@ export const compileCSS = () => {
  * SASS compilation + PostCSS optimizations and transformations for libs SCSS files.
  */
 export const compileCSSLibs = () => {
-  notification(NOTIFICATIONS.BROWSER.LIBS);
+  showNotification("CSS libs compiling");
 
-  return src(FILES_ROUTES.ENTRY.SCSS.LIBS)
+  return src("dev/scss/libs*.scss")
     .pipe(
       plumber({
         error_task: notify.onError((err) => ({
-          title: NOTIFICATIONS.ERROR.LIBS,
+          title: "CSS libs compilation error",
           message: err.message,
         })),
       }),
@@ -76,6 +65,6 @@ export const compileCSSLibs = () => {
         suffix: ".min",
       }),
     )
-    .pipe(dest(FILES_ROUTES.OUTPUT.SCSS.ROOT))
+    .pipe(dest("prod/css"))
     .pipe(gulpif(isDevEnv, browserSync.stream()));
 };

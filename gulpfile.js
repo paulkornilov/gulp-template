@@ -18,7 +18,7 @@ const watcher = () => {
   );
   watch("dev/scss/libs*.scss", STYLES.compileCSSLibs);
   watch(["dev/pug/**/*.pug", "dev/components/**/*.pug"], MARKUP.compilePug);
-  watch("dev/components/**/*.js", SCRIPTS.compileJS);
+  watch(["dev/components/**/*.js", "dev/index.js"], SCRIPTS.compileJS);
   watch("dev/assets/**/*.*", ASSETS.transformAssets);
   watch("dev/svg/icons/*.*", series(ASSETS.generateSvgSprite, MARKUP.compilePug));
 };
@@ -29,10 +29,6 @@ export const build = series(
   ASSETS.transformAssets,
 );
 
-// Generates WEBP
-export const webp_task = series(ASSETS.cleanWebpImages, ASSETS.generateWebpImages);
-// Generates JSON with CSS analysis
-export const css_analyze = SYSTEM.analyzeCSS;
 // Generates CSS style guide
 export const styleguide = SYSTEM.generateStyleguide;
 // Shows final sizes of JS and CSS files in prod folder

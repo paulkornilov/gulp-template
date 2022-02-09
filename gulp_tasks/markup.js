@@ -1,4 +1,4 @@
-// SYSTEM / PLUGINS
+// IMPORTS
 import pkg from "gulp";
 import notify from "gulp-notify";
 import pug from "gulp-pug";
@@ -7,27 +7,25 @@ import plumber from "gulp-plumber";
 import gulpif from "gulp-if";
 
 // UTILS
-import { detectEnvironment, notification, FILES_ROUTES } from "./utils.js";
+import { detectEnvironment, showNotification } from "./utils.js";
 
 const [, , isDevEnv] = detectEnvironment();
 const { src, dest } = pkg;
 
-const NOTIFICATIONS = {
-  BROWSER: "PUG compiling...",
-  ERROR: "PUG error",
-};
-
-/**
- * Transform PUG into HTML and places it into prod folder.
- */
+// Transform PUG into HTML and places it into prod folder.
 export const compilePug = () => {
-  notification(NOTIFICATIONS.BROWSER);
+  showNotification("PUG compiling...");
 
-  return src(FILES_ROUTES.ENTRY.PUG.ROOT)
+  return src([
+    "dev/pug/pages/*.pug",
+    "!dev/pug/layout/*.pug",
+    "!dev/pug/partials/_*.pug",
+    "!dev/pug/mixins/*.pug",
+  ])
     .pipe(
       plumber({
         error_task: notify.onError((err) => ({
-          title: NOTIFICATIONS.ERROR,
+          title: "PUG error",
           message: err.message,
         })),
       }),
@@ -37,7 +35,7 @@ export const compilePug = () => {
         pretty: true,
       }),
     )
-    .pipe(dest(FILES_ROUTES.OUTPUT.PUG.ROOT))
+    .pipe(dest("prod/"))
     .pipe(
       gulpif(
         isDevEnv,

@@ -1,4 +1,4 @@
-// SYSTEM / PLUGINS
+// IMPORTS
 import pkg from "gulp";
 import browserSync from "browser-sync";
 import plumber from "gulp-plumber";
@@ -8,27 +8,22 @@ import webpackStream from "webpack-stream";
 import gulpif from "gulp-if";
 
 // UTILS
-import { detectEnvironment, notification, FILES_ROUTES } from "./utils.js";
+import { detectEnvironment, showNotification } from "./utils.js";
 
 const [envMode, isProdEnv, isDevEnv] = detectEnvironment();
 const { src, dest } = pkg;
-
-const NOTIFICATIONS = {
-  BROWSER: "JavaScript compiling...",
-  ERROR: "JavaScript error",
-};
 
 /**
  * Compiles JS with webpack + optimizes it and places it into prod folder.
  */
 export const compileJS = () => {
-  notification(NOTIFICATIONS.BROWSER);
+  showNotification("JavaScript compiling...");
 
-  return src(FILES_ROUTES.ENTRY.JS.ROOT)
+  return src("dev/index.js")
     .pipe(
       plumber({
         error_task: notify.onError((err) => ({
-          title: NOTIFICATIONS.ERROR,
+          title: "JavaScript compilation error",
           message: err.message,
         })),
       }),
@@ -79,7 +74,7 @@ export const compileJS = () => {
       }),
       webpack,
     )
-    .pipe(dest(FILES_ROUTES.OUTPUT.JS.ROOT))
+    .pipe(dest("prod/js"))
     .pipe(
       gulpif(
         isDevEnv,

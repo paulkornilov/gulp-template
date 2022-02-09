@@ -1,0 +1,6 @@
+//- name - original name of svg (string)
+//- additionalClasses - name of additional classes to append for svg (string)
+
+mixin svg(name, additionalClasses)
+	svg(class=`icon ${name} ${additionalClasses || ''}`)
+		use(xlink:href=`#${name}`)
