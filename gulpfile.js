@@ -29,8 +29,6 @@ export const build = series(
   ASSETS.transformAssets,
 );
 
-// Generates CSS style guide
-export const styleguide = SYSTEM.generateStyleguide;
 // Shows final sizes of JS and CSS files in prod folder
 export const size = series(SYSTEM.cssSize, SYSTEM.jsSize);
 // Cleans prod, analysis, and SVG sprite

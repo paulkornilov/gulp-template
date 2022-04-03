@@ -5,7 +5,7 @@ import plumber from "gulp-plumber";
 import notify from "gulp-notify";
 import webpack from "webpack";
 import webpackStream from "webpack-stream";
-import gulpif from "gulp-if";
+import gulpIf from "gulp-if";
 
 // UTILS
 import { detectEnvironment, showNotification } from "./utils.js";
@@ -76,7 +76,7 @@ export const compileJS = () => {
     )
     .pipe(dest("prod/js"))
     .pipe(
-      gulpif(
+      gulpIf(
         isDevEnv,
         browserSync.reload({
           stream: true,

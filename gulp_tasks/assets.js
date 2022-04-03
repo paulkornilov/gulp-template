@@ -1,12 +1,10 @@
 // IMPORTS
 import pkg from "gulp";
-import del from "del";
-import webp from "gulp-webp";
 import imagemin from "gulp-imagemin";
 import svgSprite from "gulp-svg-sprite";
 import plumber from "gulp-plumber";
 import notify from "gulp-notify";
-import gulpif from "gulp-if";
+import gulpIf from "gulp-if";
 import browserSync from "browser-sync";
 
 // UTILS
@@ -30,10 +28,10 @@ export const transformAssets = () => {
         })),
       }),
     )
-    .pipe(gulpif(isProdEnv, imagemin()))
+    .pipe(gulpIf(isProdEnv, imagemin()))
     .pipe(dest("prod/assets/"))
     .pipe(
-      gulpif(
+      gulpIf(
         isDevEnv,
         browserSync.reload({
           stream: true,
@@ -71,7 +69,7 @@ export const generateSvgSprite = () => {
     )
     .pipe(dest("dev/svg"))
     .pipe(
-      gulpif(
+      gulpIf(
         isDevEnv,
         browserSync.reload({
           stream: true,

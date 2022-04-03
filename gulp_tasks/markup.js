@@ -4,7 +4,7 @@ import notify from "gulp-notify";
 import pug from "gulp-pug";
 import browserSync from "browser-sync";
 import plumber from "gulp-plumber";
-import gulpif from "gulp-if";
+import gulpIf from "gulp-if";
 
 // UTILS
 import { detectEnvironment, showNotification } from "./utils.js";
@@ -37,7 +37,7 @@ export const compilePug = () => {
     )
     .pipe(dest("prod/"))
     .pipe(
-      gulpif(
+      gulpIf(
         isDevEnv,
         browserSync.reload({
           stream: true,

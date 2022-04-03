@@ -7,7 +7,7 @@ import sass from "gulp-dart-sass";
 import sourcemaps from "gulp-sourcemaps";
 import cleanCSS from "gulp-clean-css";
 import rename from "gulp-rename";
-import gulpif from "gulp-if";
+import gulpIf from "gulp-if";
 import postcss from "gulp-postcss";
 
 // UTILS
@@ -31,13 +31,13 @@ export const compileCSS = () => {
         })),
       }),
     )
-    .pipe(gulpif(isDevEnv, sourcemaps.init()))
+    .pipe(gulpIf(isDevEnv, sourcemaps.init()))
     .pipe(sass())
     .pipe(postcss())
-    .pipe(gulpif(isProdEnv, cleanCSS()))
-    .pipe(gulpif(isDevEnv, sourcemaps.write()))
+    .pipe(gulpIf(isProdEnv, cleanCSS()))
+    .pipe(gulpIf(isDevEnv, sourcemaps.write()))
     .pipe(dest("prod/css"))
-    .pipe(gulpif(isDevEnv, browserSync.stream()));
+    .pipe(gulpIf(isDevEnv, browserSync.stream()));
 };
 
 /**
@@ -55,16 +55,16 @@ export const compileCSSLibs = () => {
         })),
       }),
     )
-    .pipe(gulpif(isDevEnv, sourcemaps.init()))
+    .pipe(gulpIf(isDevEnv, sourcemaps.init()))
     .pipe(sass())
-    .pipe(gulpif(isProdEnv, postcss()))
-    .pipe(gulpif(isProdEnv, cleanCSS()))
-    .pipe(gulpif(isDevEnv, sourcemaps.write()))
+    .pipe(gulpIf(isProdEnv, postcss()))
+    .pipe(gulpIf(isProdEnv, cleanCSS()))
+    .pipe(gulpIf(isDevEnv, sourcemaps.write()))
     .pipe(
       rename({
         suffix: ".min",
       }),
     )
     .pipe(dest("prod/css"))
-    .pipe(gulpif(isDevEnv, browserSync.stream()));
+    .pipe(gulpIf(isDevEnv, browserSync.stream()));
 };
