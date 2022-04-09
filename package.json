@@ -13,7 +13,8 @@
   },
   "lint-staged": {
     "dev/**/*.js": [
-      "npm run prettier"
+      "npm run prettier:fix",
+      "npm run eslint:fix"
     ],
     "dev/**/*.scss": [
       "npm run stylelint:fix"
@@ -22,9 +23,9 @@
   "scripts": {
     "dev": "gulp --development",
     "build": "gulp cleanProd && gulp build --production",
-    "build:dev": "gulp cleanProd && gulp build --development",
     "lint": "npm run stylelint:fix && npm run prettier",
-    "prettier": "prettier --write \"dev/**/*.js\" --ignore-unknown --no-error-on-unmatched-pattern",
+    "prettier:fix": "prettier --write \"dev/**/*.js\" --ignore-unknown --no-error-on-unmatched-pattern",
+    "eslint:fix": "eslint --fix \"dev/**/*.js\"",
     "stylelint": "stylelint \"dev/**/*.scss\" --custom-syntax 'postcss-scss' --config stylelint.config.cjs",
     "stylelint:fix": "stylelint \"dev/**/*.scss\" --fix --custom-syntax 'postcss-scss' --config stylelint.config.cjs",
     "size": "gulp size",
@@ -56,6 +57,9 @@
     "core-js": "^3.13.0",
     "css-declaration-sorter": "^6.0.2",
     "del": "^6.0.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-dart-sass": "^1.0.2",

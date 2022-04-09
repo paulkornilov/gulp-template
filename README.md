@@ -1,1 +1,1 @@
-# gulp-template
+# Simple template using gulp.

@@ -31,7 +31,7 @@ export const compileJS = () => {
     .pipe(
       webpackStream({
         mode: envMode,
-        devtool: isProdEnv ? "(none)" : "source-map",
+        devtool: isProdEnv ? false : "source-map",
         output: {
           filename: "[name].js",
         },

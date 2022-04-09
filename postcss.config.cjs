@@ -1,7 +1,6 @@
 const autoprefixer = require("autoprefixer");
 const postcssPresetEnv = require("postcss-preset-env");
 const sorter = require("css-declaration-sorter");
-// const combineSelectors = require("postcss-combine-duplicated-selectors");
 const mediaQueryPacker = require("node-css-mqpacker");
 const sortCSSmq = require("sort-css-media-queries");
 const minMaxMedia = require("postcss-media-minmax");
@@ -13,7 +12,6 @@ module.exports = {
     require("postcss-flexbugs-fixes"),
     require("postcss-discard-duplicates"),
     require("postcss-merge-rules"),
-    // combineSelectors({ removeDuplicatedProperties: true }),
     mediaQueryPacker({
       sort: sortCSSmq.desktopFirst,
     }),
