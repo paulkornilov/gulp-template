@@ -1,6 +1,6 @@
 // IMPORTS
 import pkg from "gulp";
-import del from "del";
+import { deleteAsync } from "del";
 import size from "gulp-size";
 import notify from "gulp-notify";
 import browserSync from "browser-sync";
@@ -8,11 +8,11 @@ import browserSync from "browser-sync";
 const { src } = pkg;
 
 export const clean = () => {
-  return del(["prod/*", "dev/svg/sprite.svg"]);
+  return deleteAsync(["prod/*", "dev/svg/sprite.svg"]);
 };
 
 export const cleanProd = () => {
-  return del(["prod/*"]);
+  return deleteAsync(["prod/*"]);
 };
 
 export const cssSize = () => {

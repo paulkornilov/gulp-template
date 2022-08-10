@@ -10,7 +10,7 @@ import gulpIf from "gulp-if";
 // UTILS
 import { detectEnvironment, showNotification } from "./utils.js";
 
-const [envMode, isProdEnv, isDevEnv] = detectEnvironment();
+const { envMode, isDevelopmentEnvironment, isProductionEnvironment } = detectEnvironment();
 const { src, dest } = pkg;
 
 /**
@@ -31,12 +31,12 @@ export const compileJS = () => {
     .pipe(
       webpackStream({
         mode: envMode,
-        devtool: isProdEnv ? false : "source-map",
+        devtool: isProductionEnvironment ? false : "source-map",
         output: {
           filename: "[name].js",
         },
         optimization: {
-          minimize: true,
+          minimize: isProductionEnvironment ? true : false,
           splitChunks: {
             cacheGroups: {
               main: {
@@ -60,7 +60,7 @@ export const compileJS = () => {
             },
           },
         },
-        module: isProdEnv
+        module: isProductionEnvironment
           ? {
               rules: [
                 {
@@ -77,7 +77,7 @@ export const compileJS = () => {
     .pipe(dest("prod/js"))
     .pipe(
       gulpIf(
-        isDevEnv,
+        isDevelopmentEnvironment,
         browserSync.reload({
           stream: true,
         }),

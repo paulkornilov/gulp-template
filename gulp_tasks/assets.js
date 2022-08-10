@@ -10,7 +10,7 @@ import browserSync from "browser-sync";
 // UTILS
 import { detectEnvironment, showNotification } from "./utils.js";
 
-const [, isProdEnv, isDevEnv] = detectEnvironment();
+const { isProductionEnvironment, isDevelopmentEnvironment } = detectEnvironment();
 const { src, dest } = pkg;
 
 /**
@@ -28,11 +28,11 @@ export const transformAssets = () => {
         })),
       }),
     )
-    .pipe(gulpIf(isProdEnv, imagemin()))
+    .pipe(gulpIf(isProductionEnvironment, imagemin()))
     .pipe(dest("prod/assets/"))
     .pipe(
       gulpIf(
-        isDevEnv,
+        isDevelopmentEnvironment,
         browserSync.reload({
           stream: true,
         }),
@@ -70,7 +70,7 @@ export const generateSvgSprite = () => {
     .pipe(dest("dev/svg"))
     .pipe(
       gulpIf(
-        isDevEnv,
+        isDevelopmentEnvironment,
         browserSync.reload({
           stream: true,
         }),

@@ -13,7 +13,7 @@ import postcss from "gulp-postcss";
 // UTILS
 import { detectEnvironment, showNotification } from "./utils.js";
 
-const [, isProdEnv, isDevEnv] = detectEnvironment();
+const { isProductionEnvironment, isDevelopmentEnvironment } = detectEnvironment();
 const { src, dest } = pkg;
 
 /**
@@ -31,13 +31,13 @@ export const compileCSS = () => {
         })),
       }),
     )
-    .pipe(gulpIf(isDevEnv, sourcemaps.init()))
+    .pipe(gulpIf(isDevelopmentEnvironment, sourcemaps.init()))
     .pipe(sass())
     .pipe(postcss())
-    .pipe(gulpIf(isProdEnv, cleanCSS()))
-    .pipe(gulpIf(isDevEnv, sourcemaps.write()))
+    .pipe(gulpIf(isProductionEnvironment, cleanCSS()))
+    .pipe(gulpIf(isDevelopmentEnvironment, sourcemaps.write()))
     .pipe(dest("prod/css"))
-    .pipe(gulpIf(isDevEnv, browserSync.stream()));
+    .pipe(gulpIf(isDevelopmentEnvironment, browserSync.stream()));
 };
 
 /**
@@ -55,16 +55,16 @@ export const compileCSSLibs = () => {
         })),
       }),
     )
-    .pipe(gulpIf(isDevEnv, sourcemaps.init()))
+    .pipe(gulpIf(isDevelopmentEnvironment, sourcemaps.init()))
     .pipe(sass())
-    .pipe(gulpIf(isProdEnv, postcss()))
-    .pipe(gulpIf(isProdEnv, cleanCSS()))
-    .pipe(gulpIf(isDevEnv, sourcemaps.write()))
+    .pipe(gulpIf(isProductionEnvironment, postcss()))
+    .pipe(gulpIf(isProductionEnvironment, cleanCSS()))
+    .pipe(gulpIf(isDevelopmentEnvironment, sourcemaps.write()))
     .pipe(
       rename({
         suffix: ".min",
       }),
     )
     .pipe(dest("prod/css"))
-    .pipe(gulpIf(isDevEnv, browserSync.stream()));
+    .pipe(gulpIf(isDevelopmentEnvironment, browserSync.stream()));
 };

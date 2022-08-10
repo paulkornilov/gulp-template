@@ -9,7 +9,7 @@ import gulpIf from "gulp-if";
 // UTILS
 import { detectEnvironment, showNotification } from "./utils.js";
 
-const [, , isDevEnv] = detectEnvironment();
+const { isDevelopmentEnvironment } = detectEnvironment();
 const { src, dest } = pkg;
 
 // Transform PUG into HTML and places it into prod folder.
@@ -38,7 +38,7 @@ export const compilePug = () => {
     .pipe(dest("prod/"))
     .pipe(
       gulpIf(
-        isDevEnv,
+        isDevelopmentEnvironment,
         browserSync.reload({
           stream: true,
         }),

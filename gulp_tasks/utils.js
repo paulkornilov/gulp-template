@@ -11,7 +11,7 @@ export const detectEnvironment = () => {
 
   isDevelopmentEnvironment ? setDevEnv() : setProdEnv();
 
-  return [envMode, isProductionEnvironment, isDevelopmentEnvironment];
+  return { envMode, isProductionEnvironment, isDevelopmentEnvironment };
 };
 
 /**
@@ -26,7 +26,9 @@ const setProdEnv = () => (process.env.NODE_ENV = "production");
  * @param notificationText - string with desired text
  */
 export const showNotification = (notificationText) => {
-  if (detectEnvironment()[2]) {
+  const { isDevelopmentEnvironment } = detectEnvironment();
+
+  if (isDevelopmentEnvironment) {
     browserSync.notify(notificationText);
   }
 };
